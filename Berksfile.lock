@@ -1,5 +1,9 @@
 DEPENDENCIES
+  docker (~> 2.3.2)
   golang (~> 1.7.0)
 
 GRAPH
+  compat_resource (12.5.14)
+  docker (2.3.2)
+    compat_resource (>= 12.5.14)
   golang (1.7.0)
