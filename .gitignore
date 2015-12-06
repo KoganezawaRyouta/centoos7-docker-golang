@@ -1,0 +1,12 @@
+.kitchen/
+.kitchen.local.yml
+/cookbooks/
+.bundle
+nfs_sync_dir/*
+!.gitkeep
+.vagrant
+vendor/bundle/
+.envrc
+.tags
+
+.DS_Store

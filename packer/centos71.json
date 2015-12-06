@@ -1,0 +1,55 @@
+{
+  "variables": {
+    "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/7.1.1503/isos/x86_64/CentOS-7-x86_64-DVD-1503-01.iso",
+    "iso_checksum": "1795184136b8bdddabe50453cc2cc2d46f0f7c5e",
+    "update": "false",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "install_vagrant_key": "true",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "ftp_proxy": "{{env `ftp_proxy`}}",
+    "rsync_proxy": "{{env `rsync_proxy`}}",
+    "no_proxy": "{{env `no_proxy`}}"
+  },
+  "builders": [{
+    "vm_name": "centos71",
+    "type": "virtualbox-iso",
+    "http_directory": "http",
+    "iso_url": "{{ user `iso_url` }}",
+    "iso_checksum": "{{ user `iso_checksum` }}",
+    "iso_checksum_type": "sha1",
+    "guest_os_type": "RedHat_64",
+    "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+    "virtualbox_version_file": ".vbox_version",
+    "ssh_username": "{{ user `ssh_username` }}",
+    "ssh_password": "{{ user `ssh_password` }}",
+    "ssh_wait_timeout": "10000s",
+    "boot_command": [
+      "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort}}/ks7.cfg<enter>"
+    ],
+    "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
+    "disk_size": 10140,
+    "vboxmanage": [
+      ["modifyvm", "{{.Name}}", "--memory", "512"],
+      ["modifyvm", "{{.Name}}", "--cpus", "1"]
+    ]
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+    "scripts": [
+      "script/fix-slow-dns.sh",
+      "script/sshd.sh",
+      "script/update.sh",
+      "script/vagrant.sh",
+      "script/vmware.sh",
+      "script/cmtool.sh",
+      "script/cleanup.sh"
+    ]
+  }],
+  "post-processors": [{
+    "type": "vagrant",
+    "output": "box/buyma-centos-7-1-x86-64-virtualbox.box"
+  }]
+}
