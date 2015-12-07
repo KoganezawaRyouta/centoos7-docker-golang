@@ -1,0 +1,3 @@
+nginxのconfをgolang用とlotus用で作成する
+golangのapiを作成する
+lotusのapiを作成する

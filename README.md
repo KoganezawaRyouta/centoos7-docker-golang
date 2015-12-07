@@ -45,6 +45,7 @@ bundle exec berks vendor cookbooks
 ### 自前のcookbookを作成する場合
 ```
 bundle exec knife cookbook create site-docker -o site-cookbooks/
+bundle exec knife cookbook create site-nginx -o site-cookbooks/
 ```
 
 

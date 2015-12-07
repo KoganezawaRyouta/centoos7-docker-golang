@@ -1,9 +1,36 @@
 DEPENDENCIES
   docker (~> 2.3.2)
+  git
   golang (~> 1.7.0)
+  ntp
+  rbenv
+    git: https://github.com/muskox/chef-rbenv.git
+    revision: 7b1b96356ac61072c1d2c181642f98bb5c09bd7e
+  ruby_build
 
 GRAPH
+  apt (2.9.2)
+  build-essential (2.2.4)
+  chef_handler (1.2.0)
   compat_resource (12.5.14)
+  dmg (2.3.0)
   docker (2.3.2)
     compat_resource (>= 12.5.14)
+  git (4.3.4)
+    build-essential (>= 0.0.0)
+    dmg (>= 0.0.0)
+    windows (>= 0.0.0)
+    yum-epel (>= 0.0.0)
   golang (1.7.0)
+  java (1.36.0)
+    apt (>= 0.0.0)
+  ntp (1.8.6)
+  rbenv (0.7.3)
+    java (> 1.4.0)
+    ruby_build (>= 0.0.0)
+  ruby_build (0.8.0)
+  windows (1.38.4)
+    chef_handler (>= 0.0.0)
+  yum (3.8.2)
+  yum-epel (0.6.5)
+    yum (~> 3.2)
