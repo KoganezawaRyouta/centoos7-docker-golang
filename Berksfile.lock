@@ -1,7 +1,7 @@
 DEPENDENCIES
   docker (~> 2.3.2)
   git
-  golang (~> 1.7.0)
+  iptables (~> 2.0.1)
   ntp
   rbenv
     git: https://github.com/muskox/chef-rbenv.git
@@ -21,7 +21,8 @@ GRAPH
     dmg (>= 0.0.0)
     windows (>= 0.0.0)
     yum-epel (>= 0.0.0)
-  golang (1.7.0)
+  iptables (2.0.1)
+    compat_resource (>= 0.0.0)
   java (1.36.0)
     apt (>= 0.0.0)
   ntp (1.8.6)

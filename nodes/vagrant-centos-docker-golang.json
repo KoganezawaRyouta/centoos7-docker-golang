@@ -3,17 +3,19 @@
     "recipe[ntp]",
     "recipe[ruby_build]",
     "recipe[rbenv::user]",
-    "recipe[golang]",
+    "recipe[site-gvm]",
     "recipe[site-docker]",
     "recipe[site-nginx]"
   ],
-  "rbenv": {
-    "user_installs": [
-      {
-        "user": "vagrant",
-        "rubies": ["2.1.4"],
-        "global": "2.1.4"
-      }
-    ]
+  "default_attributes" : {
+    "rbenv": {
+      "user_installs": [
+        {
+          "user": "vagrant",
+          "rubies": ["2.1.4"],
+          "global": "2.1.4"
+        }
+      ]
+    }
   }
 }
