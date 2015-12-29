@@ -19,12 +19,12 @@ bash 'install GVM' do
   code <<-EOH
     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
     source /home/vagrant/.gvm/scripts/gvm
+    echo export GOROOT='/home/vagrant/.gvm/gos/go1.5' >> ~/.bash_profile
+    echo export GOROOT_BOOTSTRAP='$GOROOT' >> ~/.bash_profile
+    echo export PATH='$PATH:$GOROOT/bin' >> ~/.bash_profile
+    source  ~/.bash_profile
     gvm install go1.4
     gvm use go1.4
-    echo export GOROOT='/home/vagrant/.gvm/gos/go1.5/bin/go' >> ~/.bash_profile
-    echo export PATH='$PATH:$GOROOT/bin' >> ~/.bash_profile
-    echo export GOROOT_BOOTSTRAP='$GOROOT' >> ~/.bash_profile
-    source  ~/.bash_profile
     gvm install go1.5
     gvm use go1.5
   EOH
