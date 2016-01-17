@@ -57,3 +57,39 @@ vagrant ssh-config --host=vagrant-centos-docker-golang >> ~/.ssh/config
 bundle exec knife solo prepare vagrant-centos-docker-golang -i .vagrant/machines/default/virtualbox/private_key
 bundle exec knife solo cook vagrant-centos-docker-golang -i .vagrant/machines/default/virtualbox/private_key
 ```
+
+
+
+以下、レシピに追加する
+### Enable Firewalld
+```
+sudo systemctl enable firewalld
+```
+
+## Start Firewalld
+```
+sudo systemctl start firewalld
+```
+
+### Check the Status of Firewalld
+```
+sudo systemctl status firewalld
+```
+
+### Webサーバー(http)のサービス（ポート）を永続的に許可
+```
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="172.16.0.146" port protocol="tcp" port="9090" accept"
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+```
+
+# ルールの追加
+sudo firewall-cmd --direct --remove-rule="rule family="ipv4" source address="172.16.0.146" port protocol="tcp" port="9090" accept"
+
+# ルールの削除
+sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="127.0.0.1" port port="9090" protocol="tcp" accept'
+sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="127.0.0.1" port port="1234" protocol="tcp" accept'
+sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="172.16.0.146" port port="9090" protocol="tcp" accept'
+sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="172.16.0.146" port port="1234" protocol="tcp" accept'
