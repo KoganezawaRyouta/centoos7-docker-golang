@@ -18,6 +18,6 @@ package "nginx" do
 end
 
 service "nginx" do
-  action [:enable, :start]
+  action [:enable, :stop]
   supports :start => true, :status => true, :restart => true, :reload => true
 end
