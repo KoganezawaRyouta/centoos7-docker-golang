@@ -12,17 +12,17 @@
   end
 end
 
+template '/home/vagrant/.bash_profile' do
+  mode 0644
+end
+
 bash 'install GVM' do
   user 'vagrant'
-  cwd '/home/vagrant'
-  cwd '/home/vagrant'
+  group 'vagrant'
+  environment 'HOME' => '/home/vagrant'
   code <<-EOH
     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
     source /home/vagrant/.gvm/scripts/gvm
-    echo export GOROOT='/home/vagrant/.gvm/gos/go1.5' >> ~/.bash_profile
-    echo export GOROOT_BOOTSTRAP='$GOROOT' >> ~/.bash_profile
-    echo export PATH='$PATH:$GOROOT/bin' >> ~/.bash_profile
-    source  ~/.bash_profile
     gvm install go1.4
     gvm use go1.4
     gvm install go1.5

@@ -7,15 +7,13 @@
     "recipe[site-docker]",
     "recipe[site-nginx]"
   ],
-  "default_attributes" : {
-    "rbenv": {
-      "user_installs": [
-        {
-          "user": "vagrant",
-          "rubies": ["2.1.4"],
-          "global": "2.1.4"
-        }
-      ]
-    }
+  "rbenv": {
+    "user_installs": [
+      {
+        "user": "vagrant",
+        "rubies": ["2.1.4"],
+        "global": "2.1.4"
+      }
+    ]
   }
 }

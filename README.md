@@ -93,3 +93,7 @@ sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source ad
 sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="127.0.0.1" port port="1234" protocol="tcp" accept'
 sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="172.16.0.146" port port="9090" protocol="tcp" accept'
 sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="172.16.0.146" port port="1234" protocol="tcp" accept'
+
+
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
