@@ -59,7 +59,7 @@ bundle exec knife solo cook vagrant-centos-docker-golang -i .vagrant/machines/de
 ```
 
 
-
+ここから先はただのメモ！！
 以下、レシピに追加する
 ### Enable Firewalld
 ```
@@ -75,6 +75,7 @@ sudo systemctl start firewalld
 ```
 sudo systemctl status firewalld
 ```
+
 
 ### Webサーバー(http)のサービス（ポート）を永続的に許可
 ```
@@ -97,3 +98,8 @@ sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source ad
 
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
+
+sudo systemctl stop firewalld
+sudo systemctl mask firewalld
+
+http://192.168.80.10:8000/
