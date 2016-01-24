@@ -16,7 +16,7 @@ template '/home/vagrant/.bash_profile' do
   mode 0644
 end
 
-bash 'install GVM' do
+bash 'install gvm' do
   user 'vagrant'
   group 'vagrant'
   environment 'HOME' => '/home/vagrant'

@@ -5,6 +5,7 @@
     "recipe[ruby_build]",
     "recipe[rbenv::user]",
     "recipe[site-gvm]",
+    "recipe[site-direnv]",
     "recipe[site-docker]",
     "recipe[site-nginx]"
   ],

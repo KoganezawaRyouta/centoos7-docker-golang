@@ -47,6 +47,7 @@ bundle exec berks vendor cookbooks
 bundle exec knife cookbook create site-docker -o site-cookbooks/
 bundle exec knife cookbook create site-nginx -o site-cookbooks/
 bundle exec knife cookbook create site-gvm -o site-cookbooks/
+bundle exec knife cookbook create site-direnv -o site-cookbooks/
 ```
 
 
