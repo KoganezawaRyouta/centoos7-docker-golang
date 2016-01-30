@@ -104,3 +104,6 @@ sudo systemctl stop firewalld
 sudo systemctl mask firewalld
 
 http://192.168.80.10:8000/
+
+# add
+dev.coincheck.com 192.168.80.10:8000

@@ -6,11 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-
-template '/home/vagrant/.bash_profile' do
-  mode 0644
-end
-
 bash 'install direnv' do
   user 'root'
   group 'root'
