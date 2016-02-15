@@ -6,3 +6,4 @@ cookbook 'rbenv', git: 'https://github.com/muskox/chef-rbenv.git'
 
 cookbook 'docker', '~> 2.3.2'
 cookbook 'iptables', '~> 2.0.1'
+cookbook 'mysql', '~> 6.1.2'

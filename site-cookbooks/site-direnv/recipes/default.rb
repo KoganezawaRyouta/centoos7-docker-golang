@@ -10,11 +10,11 @@ bash 'install direnv' do
   user 'root'
   group 'root'
   code <<-EOH
-    cd /tmp
-    git clone https://github.com/direnv/direnv
+    wget -O direnv https://github.com/direnv/direnv/releases/download/v2.6.0/direnv.linux-amd64
+    chmod +x direnv
     cd direnv
-    make install
-    rm -rf /tmp/direnv
+    sudo make install
+    sudo mv direnv /usr/local/bin/
     echo 'eval "$(direnv hook bash)"' >> /home/vagrant/.bashrc
   EOH
   not_if 'test -f /usr/local/bin/direnv'
