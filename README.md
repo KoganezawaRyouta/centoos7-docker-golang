@@ -11,6 +11,7 @@
 vagrant plugin install vagrant-omnibus
 vagrant plugin install sahara
 vagrant plugin install vagrant-serverspec
+vagrant plugin install vagrant-vbguest
 ```
 
 ## set up to gem
@@ -24,7 +25,8 @@ https://github.com/boxcutter/centos
 https://github.com/eigo-s/packer_templates/tree/master/centos7.0/x86_64
 
 ```
-packer build ./packer/centos71.json
+cd packer
+packer build ./centos71.json
 vagrant box add --name centos71 packer/box/buyma-centos-7-1-x86-64-virtualbox.box
 ```
 
@@ -54,11 +56,16 @@ bundle exec knife cookbook create site-direnv -o site-cookbooks/
 run chef solo
 ```
 # add ssh config
+vagrant up
+↑Authentication failureでエラーになる場合
+ssh-keygen -yf ~/.vagrant.d/insecure_private_key > .vagrant/machines/default/virtualbox/private_key
+vagrant ssh
+vi /home/vagrant/.ssh/authorized_keys # 生成した公開鍵を設定する
+
 vagrant ssh-config --host=vagrant-centos-docker-golang >> ~/.ssh/config
 bundle exec knife solo prepare vagrant-centos-docker-golang -i .vagrant/machines/default/virtualbox/private_key
-bundle exec knife solo cook vagrant-centos-docker-golang -i .vagrant/machines/default/virtualbox/private_key
+bundle exec knife solo cook vagrant-centos-docker-golang -i .vagrant/machines/default/virtualbox/private_key
 ```
-
 
 ここから先はただのメモ！！
 以下、レシピに追加する
@@ -100,12 +107,42 @@ sudo firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source ad
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
 
+
+## 下記エラーになる場合
+```
+Failed to mount folders in Linux guest. This is usually because
+the "vboxsf" file system is not available. Please verify that
+the guest additions are properly installed in the guest and
+can work properly. The command attempted was:
+
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` vagrant /vagrant
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` vagrant /vagrant
+
+The error output from the last command was:
+
+/sbin/mount.vboxsf: mounting failed with the error: No such device
+```
+
+```
+$ sudo yum -y update
+$ sudo yum install -y kernel-devel gcc
+$ sudo /etc/rc.d/init.d/vboxadd setup
+```
+
+```
+$ vagrant reload --provision
+```
+
+## firewalld無効化
+```
 sudo systemctl stop firewalld
 sudo systemctl mask firewalld
+```
 
-http://192.168.80.10:8000/
+## hostsの設定
+192.168.80.10 dev.koga.com
 
-# add
-dev.coincheck.com 192.168.80.10:8000
+## アプリへアクセス
+http://dev.koga.com/
 
 mysql -h localhost -u web_app -p

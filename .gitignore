@@ -8,5 +8,5 @@ nfs_sync_dir/*
 vendor/bundle/
 .envrc
 .tags
-
+public_key
 .DS_Store
